@@ -9,10 +9,9 @@
         </ul>
       </nav>
       <div class="copyright text-center">
-        &copy; Coded with
-        <i class="fa fa-heart heart"></i> by
-        <a href="https://binarcode.com" target="_blank">BinarCode</a>.
-        Designed by <a href="https://www.creative-tim.com/?ref=pdf-vuejs" target="_blank">Creative Tim</a>.
+        &copy; Office of the Deputy Chief Secretory (Planning), SgPC <i class="fa fa-heart heart"></i> Developed
+             by <a href="#" target="_blank">Pushpamal Gunasena</a>
+         <!--<a href="#" target="_blank">Creative Tim</a>.-->
       </div>
     </div>
   </footer>

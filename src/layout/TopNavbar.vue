@@ -24,7 +24,7 @@
             <template slot="title">
               <i class="nc-icon nc-planet"></i>
               <b class="caret"></b>
-              <span class="notification">5</span>
+              <span class="notification">7</span>
             </template>
             <a class="dropdown-item" href="#">Notification 1</a>
             <a class="dropdown-item" href="#">Notification 2</a>

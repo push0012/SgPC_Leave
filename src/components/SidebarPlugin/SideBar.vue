@@ -4,13 +4,18 @@
        :data-color="backgroundColor"
        :data-image="backgroundImage">
     <div class="sidebar-wrapper">
-      <div class="logo">
+      <div class="logo ">
         <a href="#" class="simple-text logo__container">
             <div class="logo-img">
-                <img src="img/vue-logo.png" alt="">
+                <img src="img/icons/leaves.png" alt="">
             </div>
-          {{title}}
+            <div class="logo-text" >
+              <h5 style="font-size: 1em; margin-bottom: 0px;">Leave System</h5>
+              <p align="center" style="font-size: 0.6em; margin: auto;">Version 1.0</p>
+            </div>
+          
         </a>
+        
       </div>
 
       <slot name="content"></slot>
@@ -43,7 +48,7 @@
     props: {
       title: {
         type: String,
-        default: 'Leave System'
+        default: 'L. E. M. S. Version 01'
       },
       backgroundColor: {
         type: String,
@@ -55,7 +60,7 @@
       },
       backgroundImage: {
         type: String,
-        default: 'img/sidebar-5.jpg'
+        default: 'img/sidebar-6.jpg'
       },
       activeColor: {
         type: String,
@@ -99,5 +104,8 @@
  }
  .sidebar .sidebar-wrapper .logo .logo__container {
    padding-left: 10px;
+ }
+ .logo-desc{
+   font-size: 0.8em;
  }
 </style>

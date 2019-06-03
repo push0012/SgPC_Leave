@@ -1,6 +1,8 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+
+
       <div class="row">
         <div class="col-xl-3 col-md-6">
           <stats-card>
@@ -63,6 +65,42 @@
         </div>
 
       </div>
+
+      <div class="row">
+        
+        <div class="col-xl-3 col-md-6">
+          <stats-card>
+            <div slot="header" class="icon-info">
+              <i class="nc-icon nc-favourite-28 text-info"></i>
+            </div>
+            <div slot="content">
+              <p class="card-category">Errors</p>
+              <h4 class="card-title">23</h4>
+            </div>
+            <div slot="footer">
+              <i class="fa fa-clock-o"></i>Last day
+            </div>
+          </stats-card>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <stats-card>
+            <div slot="header" class="icon-info">
+              <i class="nc-icon nc-favourite-28 text-primary"></i>
+            </div>
+            <div slot="content">
+              <p class="card-category">Followers</p>
+              <h4 class="card-title">+45</h4>
+            </div>
+            <div slot="footer">
+              <i class="fa fa-refresh"></i>Updated now
+            </div>
+          </stats-card>
+        </div>
+
+      </div>
+
+
       <div class="row">
         <div class="col-md-8">
           <chart-card :chart-data="lineChart.data"
