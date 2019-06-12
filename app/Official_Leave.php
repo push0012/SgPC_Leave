@@ -12,7 +12,7 @@ class Official_Leave extends Model
 
     protected $fillable = [
         'request_date','leave_desc','dates',
-        'leave_approve','deleted','user_data',
+        'deleted','user_data',
         'emp_id'
     ];
 }

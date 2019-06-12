@@ -13,32 +13,20 @@ class CreateDayLeaveApprovesTable extends Migration
      */
     public function up()
     {
-        Schema::create('day_leave_approves', function (Blueprint $table) {
+        Schema::create('head_leave_approves', function (Blueprint $table) {
+            $table->string('leave_type',10);
             $table->boolean('leave_approve');
-            $table->integer('legger_page');
             $table->boolean('deleted');
             $table->string('user_data',255);
             $table->timestamps();
         });
 
-        Schema::table('day_leave_approves', function (Blueprint $table) {
-            $table->unsignedBigInteger('dl_leave_id');
+        Schema::table('head_leave_approves', function (Blueprint $table) {
+            $table->unsignedBigInteger('leave_id');
         
-            $table->foreign('dl_leave_id')->references('dl_leave_id')->on('day_leaves')
+            $table->foreign('leave_id')->references('dl_leave_id')->on('day_leaves')
             ->onDelete('cascade')->onUpdate('cascade');
-        });
-        Schema::table('day_leave_approves', function (Blueprint $table) {
-            $table->unsignedBigInteger('emp_act_id');
-        
-            $table->foreign('emp_act_id')->references('emp_id')->on('employees')
-            ->onDelete('cascade')->onUpdate('cascade');
-        });
-        Schema::table('day_leave_approves', function (Blueprint $table) {
-            $table->unsignedBigInteger('supervising_officer');
-        
-            $table->foreign('supervising_officer')->references('emp_id')->on('employees')
-            ->onDelete('cascade')->onUpdate('cascade');
-        });
+        });     
         
     }
     				
@@ -49,6 +37,6 @@ class CreateDayLeaveApprovesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('day_leave_approves');
+        Schema::dropIfExists('head_leave_approves');
     }
 }

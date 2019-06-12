@@ -11,9 +11,10 @@ class Day_Leave extends Model
     protected $primaryKey = 'dl_leave_id';
 
     protected $fillable = [
-        'leave_type','leave_size','request_date',
+        'leave_title','leave_size','request_date',
         'leave_desc','start_date','end_date',
-        'on_leave_address','deleted','user_data',
+        'on_leave_address','legger_page',
+        'deleted','user_data',
         'emp_id'
     ];
 }

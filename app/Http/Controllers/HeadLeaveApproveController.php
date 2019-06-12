@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Job_Role;
 
-class JobRoleController extends Controller
+class HeadLeaveApproveController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class JobRoleController extends Controller
      */
     public function index()
     {
-        return Job_Role::all();
+        //
     }
 
     /**
@@ -24,7 +23,7 @@ class JobRoleController extends Controller
      */
     public function create()
     {
-      
+        //
     }
 
     /**
@@ -35,9 +34,7 @@ class JobRoleController extends Controller
      */
     public function store(Request $request)
     {
-        $job_roles = Job_Role::create($request->all());
-
-        return response()->json($job_roles, 201);
+        //
     }
 
     /**
@@ -48,7 +45,7 @@ class JobRoleController extends Controller
      */
     public function show($id)
     {
-        return Job_Role::find($id);
+        //
     }
 
     /**

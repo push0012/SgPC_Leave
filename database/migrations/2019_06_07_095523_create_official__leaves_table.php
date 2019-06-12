@@ -18,7 +18,6 @@ class CreateOfficialLeavesTable extends Migration
             $table->date('request_date');
             $table->string('leave_desc', 100);
             $table->date('dates');
-            $table->boolean('leave_approve');
             $table->boolean('deleted');
             $table->string('user_data',255);
             $table->timestamps();

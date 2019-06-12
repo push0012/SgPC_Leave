@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Job_Role;
+use App\Day_Leave;
 
-class JobRoleController extends Controller
+class DayLeaveController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class JobRoleController extends Controller
      */
     public function index()
     {
-        return Job_Role::all();
+        return Day_Leave::all();
     }
 
     /**
@@ -24,7 +24,7 @@ class JobRoleController extends Controller
      */
     public function create()
     {
-      
+        //
     }
 
     /**
@@ -34,10 +34,22 @@ class JobRoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $job_roles = Job_Role::create($request->all());
+    {   
+        DB::beginTransaction();
+  
+        try 
+        {
 
-        return response()->json($job_roles, 201);
+            $day_leaves = Day_Leave::create($request->all());
+            return response()->json($day_leaves, 201);
+
+
+            DB::commit();
+        }catch (\Exception $e) {
+
+            DB::rollback();
+            
+        }
     }
 
     /**
@@ -48,7 +60,7 @@ class JobRoleController extends Controller
      */
     public function show($id)
     {
-        return Job_Role::find($id);
+        //
     }
 
     /**

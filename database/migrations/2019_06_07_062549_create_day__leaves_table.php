@@ -15,13 +15,14 @@ class CreateDayLeavesTable extends Migration
     {
         Schema::create('day_leaves', function (Blueprint $table) {
             $table->bigIncrements('dl_leave_id');
-            $table->string('leave_type', 20);
+            $table->string('leave_title', 20);
             $table->double('leave_size', 3,2);
             $table->date('request_date');
             $table->string('leave_desc', 100);
             $table->date('start_date');
             $table->date('end_date');
             $table->string('on_leave_address', 100);
+            $table->integer('legger_page');
             $table->boolean('deleted');
             $table->integer('user_data');
             $table->timestamps();
