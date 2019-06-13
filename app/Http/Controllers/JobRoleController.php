@@ -36,7 +36,7 @@ class JobRoleController extends Controller
     public function store(Request $request)
     {
         $job_roles = Job_Role::create($request->all());
-
+        
         return response()->json($job_roles, 201);
     }
 

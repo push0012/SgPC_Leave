@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Day_Leave;
-
+use App\Head_Leave_Approve;
+use DB;
 class DayLeaveController extends Controller
 {
     /**
@@ -39,12 +40,20 @@ class DayLeaveController extends Controller
   
         try 
         {
-
             $day_leaves = Day_Leave::create($request->all());
+
+            $head_day_leave = new Head_Leave_Approve;
+            
+            $head_day_leave->leave_type = "dl";
+            $head_day_leave->user_data = "Admin";
+            $head_day_leave->leave_id = $day_leaves->dl_leave_id;
+            $head_day_leave->save();
+
+            //Head_Leave_Approve::create($head_day_leave->all());
+
             return response()->json($day_leaves, 201);
 
-
-            DB::commit();
+           DB::commit();
         }catch (\Exception $e) {
 
             DB::rollback();
