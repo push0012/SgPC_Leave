@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Day_Leave;
 use App\Head_Leave_Approve;
+use App\Approval_Acting;
+use App\Approval_Supervise;
 use DB;
+
 class DayLeaveController extends Controller
 {
     /**
@@ -43,17 +46,36 @@ class DayLeaveController extends Controller
             $day_leaves = Day_Leave::create($request->all());
 
             $head_day_leave = new Head_Leave_Approve;
-            
+
             $head_day_leave->leave_type = "dl";
             $head_day_leave->user_data = "Admin";
             $head_day_leave->leave_id = $day_leaves->dl_leave_id;
             $head_day_leave->save();
 
-            //Head_Leave_Approve::create($head_day_leave->all());
+            $approval_acting = new Approval_Acting;
 
-            return response()->json($day_leaves, 201);
+            $approval_acting->user_data = "Admin";
+            $approval_acting->dl_leave_id = $day_leaves->dl_leave_id;
+            $approval_acting->emp_act_id = $request->emp_act_id;
+            $approval_acting->save();
 
-           DB::commit();
+            $approval_supervise = new Approval_Supervise;
+
+            $approval_supervise->leave_type = "dl";
+            $approval_supervise->user_data = "Admin";
+            $approval_supervise->leave_id = $day_leaves->dl_leave_id;
+            $approval_supervise->supervising_officer = $request->supervising_officer;
+            $approval_supervise->save();
+
+            DB::commit();
+
+            return response()->json([
+                'day_leave'=>$day_leaves,
+                'head'=>$head_day_leave,
+                'acting'=>$approval_acting,
+                'supervise'=>$approval_supervise
+            ], 201);
+            
         }catch (\Exception $e) {
 
             DB::rollback();

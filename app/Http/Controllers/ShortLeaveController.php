@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Short_Leave;
+use App\Head_Leave_Approve;
+use App\Approval_Supervise;
+use DB;
 
 class ShortLeaveController extends Controller
 {
@@ -35,9 +39,41 @@ class ShortLeaveController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $short_leaves = Short_Leave::create($request->all());
-        return response()->json($short_leaves, 201);
+        DB::beginTransaction();
+  
+        try 
+        {
+
+            $short_leaves = Short_Leave::create($request->all());
+
+            $head_short_leave = new Head_Leave_Approve;
+
+            $head_short_leave->leave_type = "sl";
+            $head_short_leave->user_data = "Admin";
+            $head_short_leave->leave_id = $short_leaves->sl_leave_id;
+            $head_short_leave->save();
+
+            $approval_supervise = new Approval_Supervise;
+
+            $approval_supervise->leave_type = "sl";
+            $approval_supervise->user_data = "Admin";
+            $approval_supervise->leave_id = $short_leaves->sl_leave_id;
+            $approval_supervise->supervising_officer = $request->supervising_officer;
+            $approval_supervise->save();
+
+            DB::commit();
+       
+            return response()->json([
+                'short_leave'=> $short_leaves,
+                'head'=> $head_short_leave,
+                'supervise'=> $approval_supervise
+            ], 201);
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+            
+        }
     }
 
     /**

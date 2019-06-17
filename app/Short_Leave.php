@@ -13,6 +13,6 @@ class Short_Leave extends Model
     protected $fillable = [
         'request_date','leave_desc','start_time','end_time',
         'deleted','user_data',
-        'emp_id','supervising_officer'
+        'emp_id'
     ];
 }

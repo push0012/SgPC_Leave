@@ -8,6 +8,9 @@ class Approval_Acting extends Model
 {
     protected $table = 'approval_actings';
 
+    protected $primaryKey = null;
+    public $incrementing = false;
+
     protected $fillable = [
         'approve_acting',
         'deleted','user_data',

@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('job_roles', 'JobRoleController');
 Route::resource('employees', 'EmployeeController');
 Route::resource('day_leaves', 'DayLeaveController');
+Route::resource('short_leaves', 'ShortLeaveController');
+Route::resource('official_leaves', 'OfficialLeaveController');
