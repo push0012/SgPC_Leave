@@ -22,3 +22,4 @@ Route::resource('employees', 'EmployeeController');
 Route::resource('day_leaves', 'DayLeaveController');
 Route::resource('short_leaves', 'ShortLeaveController');
 Route::resource('official_leaves', 'OfficialLeaveController');
+Route::resource('head_approves', 'HeadLeaveApproveController');

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Head_Leave_Approve;
+use DB;
+
 class HeadLeaveApproveController extends Controller
 {
     /**
@@ -13,7 +16,7 @@ class HeadLeaveApproveController extends Controller
      */
     public function index()
     {
-        //
+        return Head_Leave_Approve::all();
     }
 
     /**
@@ -68,7 +71,13 @@ class HeadLeaveApproveController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $head_approval = Head_Leave_Approve::where('leave_id', $id)
+        ->where('leave_type', $request->leave_type)
+        ->update(['leave_approve' => $request->leave_approve]); 
+
+        return response()->json([
+            'head_approve'=> $head_approval
+        ], 200);
     }
 
     /**

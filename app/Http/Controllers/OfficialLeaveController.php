@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Official_Leave;
+use App\Head_Leave_Approve;
+use DB;
 
 class OfficialLeaveController extends Controller
 {
@@ -35,8 +38,31 @@ class OfficialLeaveController extends Controller
      */
     public function store(Request $request)
     {
-        $official_leaves = Official_Leave::create($request->all());
-        return response()->json($official_leaves, 201);
+        DB::beginTransaction();
+  
+        try 
+        {
+            $official_leaves = Official_Leave::create($request->all());
+
+            $head_official_leave = new Head_Leave_Approve;
+
+            $head_official_leave->leave_type = "ol";
+            $head_official_leave->user_data = "Admin";
+            $head_official_leave->leave_id = $official_leaves->ol_leave_id;
+            $head_official_leave->save();
+            
+            DB::commit();
+
+            return response()->json([
+                'official_leave'=> $official_leaves,
+                'head'=> $head_official_leave
+            ], 201);
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+            
+        }
     }
 
     /**
