@@ -22,9 +22,13 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return response()->json([
+            'id'=> $request['id'],
+            'name' => $request['name'],
+            'email' => $request['email'],
+        ], 200); 
     }
 
     /**
