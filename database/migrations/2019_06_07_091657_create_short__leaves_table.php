@@ -20,24 +20,17 @@ class CreateShortLeavesTable extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->boolean('deleted');
-            $table->string('user_data',255);
+            //$table->string('user_data',255);
             $table->timestamps();
         });
 
         Schema::table('short_leaves', function (Blueprint $table) {
-            $table->unsignedBigInteger('emp_id');
+            $table->unsignedBigInteger('user_id');
         
-            $table->foreign('emp_id')->references('emp_id')->on('employees')
+            $table->foreign('user_id')->references('id')
+            ->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
         });
-        
-        Schema::table('short_leaves', function (Blueprint $table) {
-            $table->unsignedBigInteger('supervising_officer');
-        
-            $table->foreign('supervising_officer')->references('emp_id')->on('employees')
-            ->onDelete('cascade')->onUpdate('cascade');
-        });
-
     }
     /**
      * Reverse the migrations.

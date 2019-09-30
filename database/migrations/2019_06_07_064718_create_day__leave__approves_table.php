@@ -14,19 +14,21 @@ class CreateDayLeaveApprovesTable extends Migration
     public function up()
     {
         Schema::create('head_leave_approves', function (Blueprint $table) {
+            $table->integer('leave_id');
             $table->string('leave_type',10);
-            $table->boolean('leave_approve');
+            //$table->boolean('leave_approve');
+            $table->char('leave_approve',1)->default('0');
             $table->boolean('deleted');
-            $table->string('user_data',255);
             $table->timestamps();
         });
 
         Schema::table('head_leave_approves', function (Blueprint $table) {
-            $table->unsignedBigInteger('leave_id');
+            $table->unsignedBigInteger('user_id');
         
-            $table->foreign('leave_id')->references('dl_leave_id')->on('day_leaves')
-            ->onDelete('cascade')->onUpdate('cascade');
-        });     
+            $table->foreign('user_id')->references('id')->on('users')
+                                    ->onDelete('cascade')
+                                    ->onUpdate('cascade');
+        });
         
     }
     				

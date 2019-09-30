@@ -19,14 +19,15 @@ class CreateOfficialLeavesTable extends Migration
             $table->string('leave_desc', 100);
             $table->date('dates');
             $table->boolean('deleted');
-            $table->string('user_data',255);
+            //$table->string('user_data',255);
             $table->timestamps();
         });
 
         Schema::table('official_leaves', function (Blueprint $table) {
-            $table->unsignedBigInteger('emp_id');
+            $table->unsignedBigInteger('user_id');
         
-            $table->foreign('emp_id')->references('emp_id')->on('employees')
+            $table->foreign('user_id')->references('id')
+            ->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
         });
     }

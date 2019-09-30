@@ -23,14 +23,25 @@ class CreateEmployeesTable extends Migration
             $table->date('joined_date');
             $table->boolean('nine_month');
             $table->boolean('deleted');
-            $table->integer('user_data');
+            //$table->integer('user_id');
             $table->timestamps();
         });
 
         Schema::table('employees', function (Blueprint $table) {
             $table->unsignedBigInteger('job_id');
         
-            $table->foreign('job_id')->references('job_id')->on('job_roles')->onDelete('cascade');
+            $table->foreign('job_id')->references('job_id')
+                                    ->on('job_roles')
+                                    ->onDelete('cascade')
+                                    ->onUpdate('cascade');
+        });
+        Schema::table('employees', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+        
+            $table->foreign('user_id')->references('id')
+                                    ->on('users')
+                                    ->onDelete('cascade')
+                                    ->onUpdate('cascade');
         });
     }
     						

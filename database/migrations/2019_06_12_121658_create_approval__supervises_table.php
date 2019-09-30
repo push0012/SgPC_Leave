@@ -14,22 +14,18 @@ class CreateApprovalSupervisesTable extends Migration
     public function up()
     {
         Schema::create('approval_supervises', function (Blueprint $table) {
+            $table->integer('leave_id');
             $table->string('leave_type', 10);
-            $table->boolean('approve_supervise');
+            $table->char('approve_supervise',1)->default('0');
             $table->boolean('deleted');
-            $table->string('user_data',255);
+            //$table->string('user_data',255);
             $table->timestamps();
         });
-        Schema::table('approval_supervises', function (Blueprint $table) {
-            $table->unsignedBigInteger('leave_id');
         
-            $table->foreign('leave_id')->references('dl_leave_id')->on('day_leaves')
-            ->onDelete('cascade')->onUpdate('cascade');
-        });
         Schema::table('approval_supervises', function (Blueprint $table) {
             $table->unsignedBigInteger('supervising_officer');
         
-            $table->foreign('supervising_officer')->references('emp_id')->on('employees')
+            $table->foreign('supervising_officer')->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
         });  
     }

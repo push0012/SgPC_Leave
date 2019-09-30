@@ -15,7 +15,7 @@ class CreateDayLeavesTable extends Migration
     {
         Schema::create('day_leaves', function (Blueprint $table) {
             $table->bigIncrements('dl_leave_id');
-            $table->string('leave_title', 20);
+            //$table->string('leave_title', 20);
             $table->double('leave_size', 3,2);
             $table->date('request_date');
             $table->string('leave_desc', 100);
@@ -24,13 +24,14 @@ class CreateDayLeavesTable extends Migration
             $table->string('on_leave_address', 100);
             $table->integer('legger_page');
             $table->boolean('deleted');
-            $table->integer('user_data');
             $table->timestamps();
         });
         Schema::table('day_leaves', function (Blueprint $table) {
-            $table->unsignedBigInteger('emp_id');
+            $table->unsignedBigInteger('user_id');
         
-            $table->foreign('emp_id')->references('emp_id')->on('employees')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')
+            ->on('users')
+            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 								

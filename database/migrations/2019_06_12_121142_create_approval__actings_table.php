@@ -14,9 +14,10 @@ class CreateApprovalActingsTable extends Migration
     public function up()
     {
         Schema::create('approval_actings', function (Blueprint $table) {
-            $table->string('approve_acting');
+            //$table->string('approve_acting');
+            $table->char('approve_acting',1)->default('0');
             $table->boolean('deleted');
-            $table->integer('user_data');
+            //$table->integer('user_data');
             $table->timestamps();
         });
 
@@ -29,7 +30,7 @@ class CreateApprovalActingsTable extends Migration
         Schema::table('approval_actings', function (Blueprint $table) {
             $table->unsignedBigInteger('emp_act_id');
         
-            $table->foreign('emp_act_id')->references('emp_id')->on('employees')
+            $table->foreign('emp_act_id')->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
         });     
     }
