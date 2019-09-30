@@ -82,10 +82,18 @@ class RegisterController extends Controller
         if ($validator->fails()) { 
                     return response()->json(['error'=>$validator->errors()], 401);            
                 }
-        $input = $request->all(); 
+                $input = $request->all(); 
 
                 $input['password'] = bcrypt($input['password']); 
                 $user = User::create($input); 
+                
+                if($request->role == "admin"){
+                    $token = $user->createToken('GLMSystem', ['*'])->accessToken;
+                }else if($request->role == "super_user"){
+                    $token = $user->createToken('GLMSystem', ['report','approve','show'])->accessToken;
+                }else if($request->role == "user"){
+                    $token = $user->createToken('GLMSystem', ['show'])->accessToken;
+                }
                 $success['token'] =  $user->createToken('MyApp')->accessToken; 
                 $success['name'] =  $user->name;
                 
