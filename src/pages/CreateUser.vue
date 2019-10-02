@@ -63,7 +63,7 @@
 </template>
 <script>
   import Card from 'src/components/Cards/Card.vue'
-
+  const axios = require('axios');
   export default {
     components: {
       Card,
@@ -88,8 +88,21 @@
       }
     },
     methods: {
+      
       createUser () {
-         alert('Your data: ' + JSON.stringify(this.user))
+              axios.post('http://127.0.0.1:8000/register',
+              { name: this.user.name,
+                email: this.user.email,
+                role: this.user.selected,
+                password: this.user.password,
+                password_confirmation: this.user.password_confirmation
+              }
+            ).then((response) => {
+              console.log('all data has sent to database' + response);
+              this.$router.push("/admin/overview");
+            }).catch( error => { 
+              console.log('error: ' + error); 
+            });
       }
     }
   }
