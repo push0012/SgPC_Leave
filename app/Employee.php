@@ -13,6 +13,6 @@ class Employee extends Model
     protected $fillable = [
         'title','emp_name','sex','nic','mobile',
         'email','joined_date','nine_month',
-        'deleted','user_data','job_id'
+        'deleted','user_data','job_id','user_id'
     ];
 }
