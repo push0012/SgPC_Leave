@@ -22,7 +22,7 @@
         <i class="nc-icon nc-atom"></i>
         <p>Icons</p>
       </sidebar-link>
-      <sidebar-link to="/admin/maps">
+      <sidebar-link to="/admin/admin">
         <i class="nc-icon nc-settings-gear-64"></i>
         <p>Administration</p>
       </sidebar-link>
