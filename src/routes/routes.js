@@ -9,7 +9,7 @@ import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
 import Icons from 'src/pages/Icons.vue'
-import Maps from 'src/pages/Maps.vue'
+import Administrator from 'src/pages/Administrator.vue'
 import Notifications from 'src/pages/Notifications.vue'
 import Upgrade from 'src/pages/Upgrade.vue'
 import CreateUser from 'src/pages/CreateUser.vue'
@@ -36,8 +36,8 @@ const routes = [
         component: UserProfile
       },
       {
-        path: 'maps/create',
-        name: 'Maps/create',
+        path: 'admin/user/create',
+        name: 'Admin/user/create',
         component: CreateUser
       },
       {
@@ -56,9 +56,9 @@ const routes = [
         component: Icons
       },
       {
-        path: 'maps',
-        name: 'Maps',
-        component: Maps
+        path: 'admin',
+        name: 'Admin',
+        component: Administrator
       },
       {
         path: 'notifications',
