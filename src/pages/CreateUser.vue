@@ -99,7 +99,11 @@
               }
             ).then((response) => {
               console.log('all data has sent to database' + response);
-              this.$router.push("/admin/overview");
+
+              sessionStorage.setItem('user_email', response.data.success.email)
+              sessionStorage.setItem('user_id', response.data.success.user_id)
+              this.$router.push("/admin/admin/employee/create");
+              
             }).catch( error => { 
               console.log('error: ' + error); 
             });
