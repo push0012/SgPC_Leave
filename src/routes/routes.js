@@ -13,6 +13,7 @@ import Administrator from 'src/pages/Administrator.vue'
 import Notifications from 'src/pages/Notifications.vue'
 import Upgrade from 'src/pages/Upgrade.vue'
 import CreateUser from 'src/pages/CreateUser.vue'
+import CreateEmployee from 'src/pages/CreateEmployee.vue'
 
 const routes = [
   {
@@ -39,6 +40,11 @@ const routes = [
         path: 'admin/user/create',
         name: 'Admin/user/create',
         component: CreateUser
+      },
+      {
+        path: 'admin/employee/create',
+        name: 'Admin/employee/create',
+        component: CreateEmployee
       },
       {
         path: 'table-list',
