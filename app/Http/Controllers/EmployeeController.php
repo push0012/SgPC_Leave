@@ -7,10 +7,10 @@ use App\Employee;
 
 class EmployeeController extends Controller
 {
-    public function __construct()
+    /*public function __construct()
     {
         $this->middleware(['auth:api', 'scopes:edit,create,delete,view'])->except(['index', 'show']);
-    }
+    }*/
     /**
      * Display a listing of the resource.
      *
