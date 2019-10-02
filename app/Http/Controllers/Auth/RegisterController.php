@@ -76,34 +76,36 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [ 
             'name' => 'required', 
             'email' => 'required|email', 
+            'role' => 'required',
             'password' => 'required', 
             'password_confirmation' => 'required|same:password', 
         ]);
-        if ($validator->fails()) { 
+                if ($validator->fails()) { 
                     return response()->json(['error'=>$validator->errors()], 401);            
                 }
                 $input = $request->all(); 
 
                 $input['password'] = bcrypt($input['password']); 
                 $user = User::create($input); 
-                
-                if($request->role == "admin"){
+                if($request->role == "developer")
+                {
                     $token = $user->createToken('GLMSystem', ['*'])->accessToken;
-                }else if($request->role == "super_user"){
-                    $token = $user->createToken('GLMSystem', ['report','approve','show'])->accessToken;
-                }else if($request->role == "user"){
+                }
+                else if($request->role == "admin")
+                {
+                    $token = $user->createToken('GLMSystem', ['report','create','edit','delete','show','view'])->accessToken;
+                }
+                else if($request->role == "super_user")
+                {
+                    $token = $user->createToken('GLMSystem', ['report','approve','show','view'])->accessToken;
+                }
+                else if($request->role == "user")
+                {
                     $token = $user->createToken('GLMSystem', ['show'])->accessToken;
                 }
-                $success['token'] =  $user->createToken('MyApp')->accessToken; 
-                $success['name'] =  $user->name;
-                
-                //return response()->json(['success'=>$success], 201); 
 
-                return redirect()->action(
-                    'EmployeeController@create', [
-                        'id' => $user->id , 
-                        'name' => $user->name, 
-                        'email' => $user->email 
-                        ]);
+                $success['user_id'] =  $user->id; 
+                $success['email']   =  $user->email;
+                return response()->json(['success'=>$success], 201); 
     }
 }
