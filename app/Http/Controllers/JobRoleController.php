@@ -14,7 +14,9 @@ class JobRoleController extends Controller
      */
     public function index()
     {
-        return Job_Role::all();
+        $job_roles =  Job_Role::all();
+
+        return response()->json($job_roles, 201);
     }
 
     /**
