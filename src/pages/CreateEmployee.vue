@@ -75,19 +75,19 @@
         </button>
         
       </div>
-      
+
       <div class="clearfix"></div>
     </form>
   </card>
-  
+
   </div>
   </div>
   </div>
-  
+
   </div>
 </template>
 <script>
- 
+
   import Card from 'src/components/Cards/Card.vue'
   //require('vue-flash-message/dist/vue-flash-message.min.css');
   const axios = require('axios');
