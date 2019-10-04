@@ -75,20 +75,25 @@
         </button>
         
       </div>
+      
       <div class="clearfix"></div>
     </form>
   </card>
+  
   </div>
   </div>
   </div>
+  
   </div>
 </template>
 <script>
-    import Card from 'src/components/Cards/Card.vue'
-    const axios = require('axios');
+ 
+  import Card from 'src/components/Cards/Card.vue'
+  //require('vue-flash-message/dist/vue-flash-message.min.css');
+  const axios = require('axios');
   export default {
     components: {
-      Card
+      Card,
     },
     mounted(){
         this.loadJobs();
@@ -160,15 +165,23 @@
                 user_id: this.employee.user_id,
               }
             ).then((response) => {
-              console.log('all data has sent to database' + response.data.success);
-
-              //sessionStorage.setItem('user_email', response.data.success.email)
-              //sessionStorage.setItem('user_id', response.data.success.user_id)
-              //this.$router.push("/admin/overview");
+              //console.log('all data has sent to database' + response.data.success);
+              this.flashMessage.success({
+                title: 'Success Message',
+                message: 'Employee '+this.employee.name+ ' Profile has Created Successfully',
+                time: 5000,
+                opacity:100
+              });
+              this.$router.push("/admin/overview");
               
-
             }).catch( error => { 
-              console.log('error: ' + error); 
+              this.flashMessage.error({
+                  title: 'Error Message',
+                  message: 'Data Not Saved',
+                  time: 5000,
+                  opacity:100
+              });
+              this.$router.push("/admin/overview");
             });
       }
     }
