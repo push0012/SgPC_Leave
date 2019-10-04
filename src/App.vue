@@ -1,7 +1,9 @@
 <template>
   <div :class="{'nav-open': $sidebar.showSidebar}">
     <notifications></notifications>
+    <FlashMessage ></FlashMessage>
     <router-view></router-view>
+    
   </div>
 </template>
 
