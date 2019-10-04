@@ -1,5 +1,10 @@
 <template>
+
+
 <div class="content">
+  <loading :active.sync="isLoading" 
+        :is-full-page="fullPage">
+</loading>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-8">
@@ -62,14 +67,20 @@
   </div>
 </template>
 <script>
+  import Loading from 'vue-loading-overlay';
+  import 'vue-loading-overlay/dist/vue-loading.css';
+
   import Card from 'src/components/Cards/Card.vue'
   const axios = require('axios');
   export default {
     components: {
       Card,
+      Loading
     },
     data () {
       return {
+        isLoading: false,
+        fullPage: true,
         user: {
           name: '',
           email: '',
@@ -88,8 +99,12 @@
       }
     },
     methods: {
-      
       createUser () {
+              this.isLoading = true;
+              setTimeout(() => {
+                this.isLoading = false
+              },2*5000)
+
               axios.post('http://127.0.0.1:8000/register',
               { name: this.user.name,
                 email: this.user.email,
