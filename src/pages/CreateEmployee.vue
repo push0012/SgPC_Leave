@@ -107,6 +107,9 @@
     },
     data () {
       return {
+        notifications: {
+          topCenter: false
+        },
         jobs:'',
         employee: {
             title:null,
@@ -142,6 +145,15 @@
       }
     },
     methods: {
+        notifyMe(title,message,icon,type){
+          this.$notifications.notify(
+          { 
+            title:title, message: message, icon: icon, 
+            horizontalAlign: 'right',
+            verticalAlign: 'bottom',
+            type: type
+          })
+        },
         loadJobs () {
             axios.get('http://127.0.0.1:8000/job_roles'              
             ).then((response) => {
@@ -165,23 +177,23 @@
                 user_id: this.employee.user_id,
               }
             ).then((response) => {
-              //console.log('all data has sent to database' + response.data.success);
-              this.flashMessage.success({
-                title: 'Success Message',
-                message: 'Employee '+this.employee.name+ ' Profile has Created Successfully',
-                time: 5000,
-                opacity:100
-              });
-              this.$router.push("/admin/overview");
+              this.notifyMe(
+                'Success Message',
+                '<span>Employee <b> '+this.employee.name+' </b> Profile has Created Successfully',
+                'fa fa-check-circle',
+                'success'
+                );
+              this.$router.push("/admin/admin");
               
             }).catch( error => { 
-              this.flashMessage.error({
-                  title: 'Error Message',
-                  message: 'Data Not Saved',
-                  time: 5000,
-                  opacity:100
-              });
-              this.$router.push("/admin/overview");
+              
+              this.notifyMe(
+                'Error Message',
+                'Sorry, Data not Saved & User Deleted',
+                'fa fa-exclamation-triangle',
+                'danger'
+                );
+              this.$router.push("/admin/admin");
             });
       }
     }
