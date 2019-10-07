@@ -2,67 +2,74 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
-          <card>
-            <template slot="header">
-              <h4 class="card-title">Administration</h4>
-              <p class="card-category"></p>
-            </template>
-            <div class="all-icons">
-              <div class="row">
-                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
-                  <a href="#/admin/admin/user/create" >
-                  <div class="font-icon-detail" >
-                    <i class="nc-icon nc-circle-09"></i>
-                    <p class="text-primary">Create User</p>
-                  </div>
-                  </a>
-                </div>
-                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
-                  <div class="font-icon-detail">
-                    <i class="nc-icon nc-badge"></i>
-                     <p class="text-primary">View Users</p>
-                  </div>
-                </div>
-                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
-                  <div class="font-icon-detail">
-                    <i class="nc-icon nc-alien-33"></i>
-                    <p>nc-alien-33</p>
-                  </div>
-                </div>
-                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
-                  <div class="font-icon-detail">
-                    <i class="nc-icon nc-align-center"></i>
-                    <p>nc-align-center</p>
-                  </div>
-                </div>
-                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
-                  <div class="font-icon-detail">
-                    <i class="nc-icon nc-align-left-2"></i>
-                    <p>nc-align-left-2</p>
-                  </div>
-                </div>
-                <div class="font-icon-list col-lg-2 col-md-3 col-sm-4 col-6">
-                  <div class="font-icon-detail">
-                    <i class="nc-icon nc-ambulance"></i>
-                    <p>nc-ambulance</p>
-                  </div>
-                </div>
-                </div>
+
+        <div class="col-xl-3 col-md-6">
+          <a href="#/admin/admin/user/create">
+          <stats-card>
+            <div slot="header" class="icon-warning">
+              <i class="nc-icon nc-single-02 text-warning"></i>
             </div>
-          </card>
+            <div slot="content">
+              <h3 class="card-title">{{ loading.users }}</h3>
+              <p class="card-category">Registered</p>
+            </div>
+            <div slot="footer">
+              <p class="card-category">Employee Creation</p>
+            </div>
+          </stats-card>
+          </a>
         </div>
+        <div class="col-xl-3 col-md-6">
+          <a href="#/admin/admin/employee/list">
+          <stats-card>
+            <div slot="header" class="icon-warning">
+              <i class="fa fa-users text-info"></i>
+            </div>
+            <div slot="content">
+              <h3 class="card-title">{{ loading.users }}</h3>
+              <p class="card-category">Registered</p>
+            </div>
+            <div slot="footer">
+              <p class="card-category">View Employees</p>
+            </div>
+          </stats-card>
+          </a>
+        </div>
+
 
       </div>
     </div>
   </div>
 </template>
 <script>
-  
+  import ChartCard from 'src/components/Cards/ChartCard.vue'
+  import StatsCard from 'src/components/Cards/StatsCard.vue'
+  import LTable from 'src/components/Table.vue'
+  const axios = require('axios');
   export default {
+    components: {
+      LTable,
+      ChartCard,
+      StatsCard
+    },
+    mounted(){
+      this.loadData();
+    },
     data () {
       return {
-        
+        loading: {
+          users:''
+          }
+      }
+    },
+    methods: {
+      loadData(){
+      axios.get('http://127.0.0.1:8000/users'
+            ).then((response) => {
+              this.loading.users = response.data;
+            }).catch( error => { 
+              console.log('error: ' + error); 
+            });
       }
     }
   }
