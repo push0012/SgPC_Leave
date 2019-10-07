@@ -31,3 +31,6 @@ Route::resource('official_leaves', 'OfficialLeaveController');
 
 //step 4
 Route::resource('head_approves', 'HeadLeaveApproveController');
+
+//Dashboard Controller Methods
+Route::get('users', 'DashboardController@users');
