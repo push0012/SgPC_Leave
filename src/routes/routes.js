@@ -15,6 +15,7 @@ import Upgrade from 'src/pages/Upgrade.vue'
 import CreateUser from 'src/pages/CreateUser.vue'
 import CreateEmployee from 'src/pages/CreateEmployee.vue'
 import ListEmployee from 'src/pages/ListEmployee.vue'
+import EditEmployee from 'src/pages/EditEmployee.vue'
 
 const routes = [
   {
@@ -51,6 +52,11 @@ const routes = [
         path: 'admin/employee/list',
         name: 'Admin/employee/list',
         component: ListEmployee
+      },
+      {
+        path: 'admin/employee/edit',
+        name: 'Admin/employee/edit',
+        component: EditEmployee
       },
       {
         path: 'table-list',
