@@ -18,7 +18,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee =  Employee::all();
+        $employee =  Employee::select('emp_id as id','title','emp_name as name','sex','nic','mobile','email','joined_date as joined date')
+        ->where('deleted',0)->get();
         return response()->json($employee, 201);
     }
 
@@ -57,7 +58,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::where('emp_id',$id)->first();
+        return response()->json($employee, 201);
     }
 
     /**
@@ -68,7 +70,7 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -80,7 +82,10 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $employee = Employee::findorfail($id);
+        $updateNow = $employee->update($input);
+        return response()->json($updateNow, 201);
     }
 
     /**
