@@ -11,6 +11,9 @@
     <tr v-for="(item, index) in data" :key="index">
       <slot :row="item">
         <td v-for="column in columns" :key="column" v-if="hasValue(item, column)">{{itemValue(item, column)}}</td>
+         <td><a :href="'#/admin/admin/'+page+'/edit?id='+item.id"><i class="fa fa-pencil-square-o text-success" aria-hidden="true"></i></a></td>
+         <td><a :href="'#/admin/admin/'+page+'/delete/?id='+item.id"><i class="fa fa-trash text-danger" aria-hidden="true"></i></a></td>
+        <td><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></td>
       </slot>
     </tr>
     </tbody>
@@ -21,7 +24,11 @@
     name: 'l-table',
     props: {
       columns: Array,
-      data: Array
+      data: Array,
+      page: String,
+    },
+    mounted(){
+      //this.initialize();
     },
     methods: {
       hasValue (item, column) {
