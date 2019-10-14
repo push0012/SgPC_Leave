@@ -19,20 +19,21 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control"  placeholder="username">
-						
+						<input type="email" class="form-control" v-model="email" placeholder="Username or Email">
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control"  placeholder="password">
+						<input type="password" class="form-control" v-model="password" placeholder="password">
 					</div>
 					<div class="row align-items-center remember">
 						<input type="checkbox">Remember Me
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn">
+						<button @click="login" class="btn float-right login_btn">
+							Login
+						</button>
 					</div>
 				</form>
 			</div>
@@ -49,17 +50,33 @@
 </template>
 <script>
   import Card from 'src/components/Cards/Card.vue'
+  const axios = require('axios');
   export default {
     components: {
       Card
     },
     data () {
       return {
+		  email:'',
+		  password:''
       }
     },
     methods: {
-      updateProfile () {
-        alert('Your data: ' + JSON.stringify(this.user))
+      login () {
+		  var data = {
+			  client_id: 2,
+			  client_secret: '0T5mVqn15v5hbW52XG5GeWh4G6CltWFyxbhc60Ge',
+			  grant_type:'password', 
+			  username: this.email,
+			  password: this.password,
+			  scope: '*',
+		  }
+		axios.post('http://127.0.0.1:8000/oauth/token', data              
+            ).then((response) => {
+			  console.log(response); 
+            }).catch( error => { 
+              console.log('error: ' + error); 
+            });
       }
     }
   }
