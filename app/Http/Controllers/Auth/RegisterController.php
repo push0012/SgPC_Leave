@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -73,10 +74,11 @@ class RegisterController extends Controller
 
     public function register(Request $request) 
     { 
+        //return response()->json(['success'=>"hello"], 450);
         $validator = Validator::make($request->all(), [ 
             'name' => 'required', 
             'email' => 'required|email', 
-            'role' => 'required',
+            'role_id' => 'required',
             'password' => 'required', 
             'password_confirmation' => 'required|same:password', 
         ]);
@@ -86,26 +88,29 @@ class RegisterController extends Controller
                 $input = $request->all(); 
 
                 $input['password'] = bcrypt($input['password']); 
+
                 $user = User::create($input); 
-                if($request->role == "developer")
+
+               /* if($request->role_id == 1)
                 {
                     $token = $user->createToken('GLMSystem', ['*'])->accessToken;
                 }
-                else if($request->role == "admin")
+                else if($request->role_id == 2)
                 {
                     $token = $user->createToken('GLMSystem', ['report','create','edit','delete','show','view'])->accessToken;
                 }
-                else if($request->role == "super_user")
+                else if($request->role_id == 3)
                 {
                     $token = $user->createToken('GLMSystem', ['report','approve','show','view'])->accessToken;
                 }
-                else if($request->role == "user")
+                else if($request->role_id == 4)
                 {
                     $token = $user->createToken('GLMSystem', ['show'])->accessToken;
-                }
+                }*/
 
                 $success['user_id'] =  $user->id; 
                 $success['email']   =  $user->email;
+                //$success['token']   =  $token;
                 return response()->json(['success'=>$success], 201); 
     }
 }
