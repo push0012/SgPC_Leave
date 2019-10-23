@@ -91,15 +91,16 @@
         //selected: null,
         option: [
           { value: null, text: 'Please select an option', disabled: true },
-          { value: 'developer', text: 'Developer' },
-          { value: 'admin', text: 'Administrator' },
-          { value: 'super_user', text: 'Super User' },
-          { value: 'user', text: 'User' }
-        ]
+          { value: '1', text: 'Developer' },
+		      { value: '2', text: 'Admin' },
+		      { value: '3', text: 'Super User' },
+		      { value: '4', text: 'User' },
+        ],
       }
     },
     methods: {
       createUser () {
+        console.log(this.user);
               this.isLoading = true;
               setTimeout(() => {
                 this.isLoading = false
@@ -108,12 +109,12 @@
               axios.post('http://127.0.0.1:8000/register',
               { name: this.user.name,
                 email: this.user.email,
-                role: this.user.selected,
+                role_id: this.user.selected,
                 password: this.user.password,
                 password_confirmation: this.user.password_confirmation
               }
             ).then((response) => {
-              console.log('all data has sent to database' + response);
+              console.log('all data has sent to database' + response.data);
 
               sessionStorage.setItem('user_email', response.data.success.email)
               sessionStorage.setItem('user_id', response.data.success.user_id)
