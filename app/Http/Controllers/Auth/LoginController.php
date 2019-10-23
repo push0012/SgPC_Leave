@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\User; 
+use App\Role; 
 use Auth; 
 use Illuminate\Http\Request; 
+use App\Http\Controllers\Auth\Hash;
 
 class LoginController extends Controller
 {
@@ -41,25 +43,27 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
-
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
- 
-        if(Auth::attempt($credentials)) {
-
-            $token = auth()->user()->createToken('MyApp')->accessToken;
-
-            return response()->json([
-                'token' => $token,
-                'name' => auth()->user()->name
-            ], 200);
-
-        } else {
-
-            return response()->json(['error' => 'UnAuthorised'], 401);
-
+        //$id = 1;
+        $user = User::select('role_id')->where('email', $request->username)->first();
+        $role = Role::find($user->role_id);
+        if($role) {
+            switch ($role->role_name) {
+                case "developer":
+                    $data = '*';
+                    break;
+                case "admin":
+                    $data = ['report','create','edit','delete','show','view'];
+                    break;
+                case "super_user":
+                    $data = ['report','approve','show','view'];
+                    break;
+                case "user":
+                    $data = ['show'];
+                    break;
+                default:
+                    break;
+            }
         }
+        return response()->json($data , 200);
     }
 }
