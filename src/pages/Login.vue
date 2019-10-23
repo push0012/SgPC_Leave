@@ -63,21 +63,32 @@
     },
     methods: {
       login () {
-		  var data = {
-			  client_id: 2,
-			  client_secret: '0T5mVqn15v5hbW52XG5GeWh4G6CltWFyxbhc60Ge',
-			  grant_type:'password', 
-			  username: this.email,
-			  password: this.password,
-			  scope: '*',
-		  }
-		axios.post('http://127.0.0.1:8000/oauth/token', data              
+		axios.post('http://127.0.0.1:8000/login', {username: this.email}              
             ).then((response) => {
-			  console.log(response); 
+			  console.log(response.data);
+			  this.getToken(response.data); 
             }).catch( error => { 
               console.log('error: ' + error); 
             });
-      }
+	  },
+	  getToken(scopes){
+		  var data = {
+			  client_id: 2,
+			  client_secret: '0T5mVqn15v5hbW52XG5GeWh4G6CltWFyxbhc60Ge',
+			  grant_type:'password',
+			  username: this.email,
+			  password: this.password,
+			  scope: scopes
+		  }
+		  axios.post('http://127.0.0.1:8000/oauth/token', data              
+            ).then((response) => {
+			  console.log(response.data); 
+			  localStorage.setItem('access_token', response.data.access_token);
+			  localStorage.setItem('refresh_token', response.data.refresh_token);
+            }).catch( error => { 
+              console.log('error: ' + error); 
+            });
+	  }
     }
   }
 </script>
