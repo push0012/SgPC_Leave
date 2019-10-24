@@ -106,7 +106,7 @@
                 this.isLoading = false
               },2*5000)
 
-              axios.post('http://127.0.0.1:8000/register',
+              axios.post(process.env.VUE_APP_BASEURL + '/register',
               { name: this.user.name,
                 email: this.user.email,
                 role_id: this.user.selected,

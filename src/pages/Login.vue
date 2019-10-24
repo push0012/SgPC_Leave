@@ -63,7 +63,7 @@
     },
     methods: {
       login () {
-		axios.post('http://127.0.0.1:8000/login', {username: this.email}              
+		axios.post(process.env.VUE_APP_BASEURL + '/login', {username: this.email}              
             ).then((response) => {
 			  console.log(response.data);
 			  this.getToken(response.data); 
@@ -80,7 +80,7 @@
 			  password: this.password,
 			  scope: scopes
 		  }
-		  axios.post('http://127.0.0.1:8000/oauth/token', data              
+		  axios.post(process.env.VUE_APP_BASEURL + '/oauth/token', data              
             ).then((response) => {
 			  console.log(response.data); 
 			  localStorage.setItem('access_token', response.data.access_token);

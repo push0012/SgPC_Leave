@@ -47,7 +47,7 @@
     methods:{
         loadData(){
            
-            axios.get('http://127.0.0.1:8000/employees'              
+            axios.get(process.env.VUE_APP_BASEURL + '/employees'              
             ).then((response) => {
               console.log(response.data)
               this.table1.data = response.data;

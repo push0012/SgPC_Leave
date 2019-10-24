@@ -64,7 +64,7 @@
     },
     methods: {
       loadData(){
-      axios.get('http://127.0.0.1:8000/users'
+      axios.get(process.env.VUE_APP_BASEURL + '/users'
             ).then((response) => {
               this.loading.users = response.data;
             }).catch( error => { 

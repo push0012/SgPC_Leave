@@ -154,7 +154,7 @@
           })
         },
         loadJobs () {
-            axios.get('http://127.0.0.1:8000/job_roles'              
+            axios.get(process.env.VUE_APP_BASEURL + '/job_roles'              
             ).then((response) => {
               this.jobs = response.data;
             }).catch( error => { 
@@ -162,7 +162,7 @@
             });
       },
       loadEmployee(id){
-          axios.get('http://127.0.0.1:8000/employees/'+id
+          axios.get(process.env.VUE_APP_BASEURL + '/employees/'+id
             ).then((response) => {
               this.employee = response.data;
             }).catch( error => { 
@@ -171,7 +171,7 @@
       },
       editEmployee () {
         console.log(this.id)
-        axios.put('http://127.0.0.1:8000/employees/'+this.id,
+        axios.put(process.env.VUE_APP_BASEURL + '/employees/'+this.id,
               { 
                 title : this.employee.title,
                 emp_name: this.employee.emp_name,

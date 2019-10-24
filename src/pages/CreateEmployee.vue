@@ -155,7 +155,7 @@
           })
         },
         loadJobs () {
-            axios.get('http://127.0.0.1:8000/job_roles'              
+            axios.get(process.env.VUE_APP_BASEURL + '/job_roles'              
             ).then((response) => {
               this.jobs = response.data;
             }).catch( error => { 
@@ -163,7 +163,7 @@
             });
       },
       createEmployee () {
-        axios.post('http://127.0.0.1:8000/employees',
+        axios.post(process.env.VUE_APP_BASEURL + '/employees',
               { 
                 title : this.employee.title,
                 emp_name: this.employee.name,
