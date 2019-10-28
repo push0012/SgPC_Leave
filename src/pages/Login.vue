@@ -51,9 +51,11 @@
 <script>
   import Card from 'src/components/Cards/Card.vue'
   const axios = require('axios');
+  // const store = require('Store');
+  //import store from "./Store"
   export default {
     components: {
-      Card
+	  Card,
     },
     data () {
       return {
@@ -62,7 +64,7 @@
       }
     },
     methods: {
-      login () {
+		login () {
 		axios.post(process.env.VUE_APP_BASEURL + '/login', {username: this.email}              
             ).then((response) => {
 			  console.log(response.data);
@@ -70,7 +72,17 @@
             }).catch( error => { 
               console.log('error: ' + error); 
             });
-	  },
+	  	},
+		getToken(scope) {
+			let email = this.email 
+			let password = this.password
+			let scopes = scope
+			this.$store.dispatch('login', { email, password, scopes })
+				.then(() => this.$router.push('/admin/overview'))
+				.catch(err => console.log(err))
+		}
+
+      /*
 	  getToken(scopes){
 		  var data = {
 			  client_id: 2,
@@ -88,7 +100,7 @@
             }).catch( error => { 
               console.log('error: ' + error); 
             });
-	  }
+	  }*/
     }
   }
 </script>
