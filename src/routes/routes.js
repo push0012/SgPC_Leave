@@ -1,7 +1,9 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import DashboardLayout from '../layout/DashboardLayout.vue'
 // GeneralViews
 import NotFound from '../pages/NotFoundPage.vue'
-
+//import store from './store.js'
 // Admin pages
 import Login from 'src/pages/Login.vue'
 import Overview from 'src/pages/Overview.vue'
@@ -16,8 +18,12 @@ import CreateUser from 'src/pages/CreateUser.vue'
 import CreateEmployee from 'src/pages/CreateEmployee.vue'
 import ListEmployee from 'src/pages/ListEmployee.vue'
 import EditEmployee from 'src/pages/EditEmployee.vue'
+/*
+Vue.use(VueRouter)
 
-const routes = [
+const router = new VueRouter({
+  mode: 'history',*/
+  const routes = [
   {
     path: '/',
     component: Login,
@@ -31,7 +37,10 @@ const routes = [
       {
         path: 'overview',
         name: 'Overview',
-        component: Overview
+        component: Overview,
+        meta: { 
+          requiresAuth: true
+        }
       },
       {
         path: 'user',
@@ -92,14 +101,28 @@ const routes = [
   },
   { path: '*', component: NotFound }
 ]
-
-/**
- * Asynchronously load view (Webpack Lazy loading compatible)
- * The specified component must be inside the Views folder
- * @param  {string} name  the filename (basename) of the view to load.
-function view(name) {
-   var res= require('../components/Dashboard/Views/' + name + '.vue');
-   return res;
-};**/
+  /*linkActiveClass: 'nav-item active',
+  scrollBehavior: (to) => {
+    if (to.hash) {
+      return {selector: to.hash}
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }*/
+//})
+// short for routes: routes
+  
+/*
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if (this.$store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next('/login') 
+  } else {
+    next() 
+  }
+})*/
 
 export default routes
