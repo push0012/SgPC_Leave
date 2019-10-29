@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import DashboardLayout from '../layout/DashboardLayout.vue'
-// GeneralViews
-import NotFound from '../pages/NotFoundPage.vue'
-//import store from './store.js'
-// Admin pages
+import store from '../store'
+
+//import Login class
 import Login from 'src/pages/Login.vue'
+
+//import Main Templte
+import DashboardLayout from '../layout/DashboardLayout.vue'
+
+// GeneralViews 
+import NotFound from '../pages/NotFoundPage.vue'
+
+//import Admin pages
 import Overview from 'src/pages/Overview.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
@@ -18,29 +24,32 @@ import CreateUser from 'src/pages/CreateUser.vue'
 import CreateEmployee from 'src/pages/CreateEmployee.vue'
 import ListEmployee from 'src/pages/ListEmployee.vue'
 import EditEmployee from 'src/pages/EditEmployee.vue'
-/*
+
+//Create Object
 Vue.use(VueRouter)
 
+//Define Vue Router object and routes
 const router = new VueRouter({
-  mode: 'history',*/
-  const routes = [
+  mode: 'hash',
+  routes: [
   {
     path: '/',
     component: Login,
-    
+
   },
   {
     path: '/admin',
     component: DashboardLayout,
     redirect: '/admin/overview',
+    meta : {
+      requiresAuth: true
+    },
     children: [
       {
         path: 'overview',
         name: 'Overview',
         component: Overview,
-        meta: { 
-          requiresAuth: true
-        }
+        
       },
       {
         path: 'user',
@@ -100,29 +109,33 @@ const router = new VueRouter({
     ]
   },
   { path: '*', component: NotFound }
-]
-  /*linkActiveClass: 'nav-item active',
+],
+
+//some css patterns
+  linkActiveClass: 'nav-item active',
   scrollBehavior: (to) => {
     if (to.hash) {
       return {selector: to.hash}
     } else {
       return { x: 0, y: 0 }
     }
-  }*/
-//})
-// short for routes: routes
-  
-/*
+  }
+})
+
+//Check Authontication with token and store settings
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (this.$store.getters.isLoggedIn) {
+    if (store.getters.isLoggedIn) {
       next()
+      console.log('comes Here too')
       return
     }
-    next('/login') 
+    next('/') 
+    console.log('comes Here')
   } else {
     next() 
   }
-})*/
+})
 
-export default routes
+//Return Router object
+export default router
