@@ -1,54 +1,45 @@
+//Call External Libraries
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from './App.vue'
-import store from './store'
-//import routers from './routes/routes'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vSelect from 'vue-select'
 import BootstrapVue from 'bootstrap-vue'
+
+//Main Template
+import App from './App.vue'
+
+//Service Setup
+import store from './store'
+
+// router setup
+import router from './routes/routes'
+
 // LightBootstrap plugin
 import LightBootstrap from './light-bootstrap-main'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-// router setup
-import routes from './routes/routes'
+
+//Other Things
 import './registerServiceWorker'
 import FlashMessage from '@smartweb/vue-flash-message';
 
-
-Vue.use(FlashMessage);
-
-
-// plugin setup
+//Create Objects
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
-//Vue.use(router)
-//Vue.use(Store)
 Vue.use(LightBootstrap)
 Vue.use(BootstrapVue)
+Vue.use(FlashMessage);
 Vue.component('v-select', vSelect)
 
-// configure router
-const router = new VueRouter({
-  routes,
-  linkActiveClass: 'nav-item active',
-  scrollBehavior: (to) => {
-    if (to.hash) {
-      return {selector: to.hash}
-    } else {
-      return { x: 0, y: 0 }
-    }
-  }
-})
-
+//Authontication Actions
 //Vue.prototype.$http = axios;
 const token = localStorage.getItem('token')
 if (token) {
   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
 }
 
-/* eslint-disable no-new */
+//Make VUE object with routes and store
 new Vue({
   el: '#app',
   router,
