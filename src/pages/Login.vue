@@ -122,7 +122,7 @@ align-content: center;
 
 .cardx{
 height: 370px;
-margin-top: auto;
+margin-top: 100px;
 margin-bottom: auto;
 width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
@@ -179,8 +179,8 @@ margin-right: 5px;
 }
 
 .login_btn{
-color: black;
-background-color: #FFC312;
+color: black !important;
+background-color: #FFC312 !important;
 width: 100px;
 }
 
