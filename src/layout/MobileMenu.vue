@@ -28,15 +28,50 @@
     </base-dropdown>
 
     <li class="nav-item">
-      <a class="nav-link" href="#pablo">
+      <a href="#" class="nav-link" @click="logout">
         <span class="no-icon">Log out</span>
       </a>
     </li>
   </ul>
 </template>
 <script>
+  import Vue from 'vue';
+  import Loading from 'vue-loading-overlay';
+  import 'vue-loading-overlay/dist/vue-loading.css';
+  Vue.use(Loading);
   export default {
-    name: 'mobile-menu'
+     components: {
+     // Loading
+    },
+    data () {
+      return {
+        //isLoading: false,
+        fullPage: false,
+      }
+    },
+    methods:{
+      logout: function () {
+                let loader = this.$loading.show({
+                  // Optional parameters
+                  container: this.fullPage ? null : this.$refs.formContainer,
+                  color: 'blue',
+                  loader:'spinner',
+                  transition: 'fade',
+                });
+                setTimeout(() => {
+                  loader.hide()
+                  this.$store.dispatch('logout')
+                    .then(() => {
+                  this.$router.push('/')
+                    })
+                },5000) 
+
+            /*this.isLoading = true;
+            setTimeout(() => {
+            this.isLoading = false
+            },2*2000)*/
+      }
+    }
   }
 </script>
 <style>
