@@ -117,20 +117,20 @@
         this.$sidebar.displaySidebar(false)
       },
       logout: function () {
-        /*let loader = this.$loading.show({
+        let loader = this.$loading.show({
           container: this.fullPage ? null : this.$refs.formContainer,
           color: 'blue',
           loader:'bars',
           transition: 'fade',
         });
         setTimeout(() => {
-          loader.hide()*/
+          loader.hide()
           this.$store.dispatch('logout')
             .then(() => {
               this.$router.push('/')
             })
-       /* },2*2000) 
-*/
+        },2*2000) 
+
       }
     }
   }
