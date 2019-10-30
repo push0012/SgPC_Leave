@@ -1,6 +1,10 @@
 <template>
+<div>
+         
   <nav class="navbar navbar-expand-lg">
+   
     <div class="container-fluid">
+        
       <a class="navbar-brand" href="#/admin/overview">Dashboard</a>
       <button type="button"
               class="navbar-toggler navbar-toggler-right"
@@ -55,25 +59,38 @@
             <a class="dropdown-item" href="#">Separated link</a>
           </base-dropdown>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              Log out
-            </a>
+            <span v-if="isLoggedIn">
+              <a href="#" class="nav-link" @click="logout">
+                Log out
+              </a>
+            </span>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  </div>
 </template>
 <script>
+  import Vue from 'vue';
+  import Loading from 'vue-loading-overlay';
+  import 'vue-loading-overlay/dist/vue-loading.css';
+  Vue.use(Loading);
   export default {
+     components: {
+     // Loading
+    },
     computed: {
       routeName () {
         const {name} = this.$route
         return this.capitalizeFirstLetter(name)
-      }
+      },
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
     },
     data () {
       return {
+        //isLoading: false,
+        fullPage: false,
         activeNotifications: false
       }
     },
@@ -92,10 +109,26 @@
       },
       hideSidebar () {
         this.$sidebar.displaySidebar(false)
+      },
+      logout: function () {
+        let loader = this.$loading.show({
+          container: this.fullPage ? null : this.$refs.formContainer,
+          color: 'blue',
+          loader:'bars',
+          transition: 'fade',
+        });
+        setTimeout(() => {
+          loader.hide()
+          this.$store.dispatch('logout')
+            .then(() => {
+              this.$router.push('/')
+            })
+        },2*2000) 
+
       }
     }
   }
-
+  
 </script>
 <style>
 
