@@ -133,7 +133,7 @@ router.beforeEach((to, from, next) => {
     next('/') 
     console.log('comes Here')
   } else {
-    if (to.fullPath === '/') {
+    if ((to.fullPath === '/') && (store.getters.isLoggedIn)) { 
       next('/admin/overview');
       console.log('comes Here three')
     }else{
