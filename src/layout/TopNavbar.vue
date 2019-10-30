@@ -59,6 +59,9 @@
             <a class="dropdown-item" href="#">Separated link</a>
           </base-dropdown>
           <li class="nav-item">
+            {{username.email}}
+          </li>
+          <li class="nav-item">
             <span v-if="isLoggedIn">
               <a href="#" class="nav-link" @click="logout">
                 Log out
@@ -89,10 +92,13 @@
     },
     data () {
       return {
-        //isLoading: false,
+        username: '',
         fullPage: false,
         activeNotifications: false
       }
+    },
+    mounted(){
+      this.username = this.$store.getters.authStatus
     },
     methods: {
       capitalizeFirstLetter (string) {
@@ -111,20 +117,20 @@
         this.$sidebar.displaySidebar(false)
       },
       logout: function () {
-        let loader = this.$loading.show({
+        /*let loader = this.$loading.show({
           container: this.fullPage ? null : this.$refs.formContainer,
           color: 'blue',
           loader:'bars',
           transition: 'fade',
         });
         setTimeout(() => {
-          loader.hide()
+          loader.hide()*/
           this.$store.dispatch('logout')
             .then(() => {
               this.$router.push('/')
             })
-        },2*2000) 
-
+       /* },2*2000) 
+*/
       }
     }
   }
