@@ -35,7 +35,6 @@ const router = new VueRouter({
   {
     path: '/',
     component: Login,
-
   },
   {
     path: '/admin',
@@ -126,6 +125,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
+      
       next()
       console.log('comes Here too')
       return
@@ -133,7 +133,13 @@ router.beforeEach((to, from, next) => {
     next('/') 
     console.log('comes Here')
   } else {
+    if (to.fullPath === '/') {
+      next('/admin/overview');
+      console.log('comes Here three')
+    }else{
     next() 
+    console.log('comes Here four')
+    }
   }
 })
 
