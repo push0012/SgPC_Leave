@@ -53,10 +53,21 @@ export default new Vuex.Store({
         .catch(err => {
           commit('auth_error')
           localStorage.removeItem('access_token')
+          localStorage.removeItem('refresh_token')
           reject(err)
         })
       
-    })},
+    })
+  },
+    logout({commit}){
+      return new Promise((resolve, reject) => {
+        commit('logout')
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        delete axios.defaults.headers.common['Authorization']
+        resolve()
+      })
+    },
   },
   getters : {
     isLoggedIn: state => !!state.token,
