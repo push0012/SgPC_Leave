@@ -26,6 +26,7 @@
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
     "vue-flash-message": "^0.7.2",
+    "vue-loaders": "^3.0.2",
     "vue-loading-overlay": "^3.2.0",
     "vue-router": "^3.0.2",
     "vue-select": "^3.2.0",
