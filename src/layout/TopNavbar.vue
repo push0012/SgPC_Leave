@@ -59,7 +59,7 @@
             <a class="dropdown-item" href="#">Separated link</a>
           </base-dropdown>
           <li class="nav-item">
-            {{username.email}}
+            {{username}}
           </li>
           <li class="nav-item">
             <span v-if="isLoggedIn">
@@ -98,7 +98,8 @@
       }
     },
     mounted(){
-      this.username = this.$store.getters.authStatus
+      this.username = localStorage.getItem('username')
+      console.log(localStorage.getItem('scopes').includes('edit'));
     },
     methods: {
       capitalizeFirstLetter (string) {
