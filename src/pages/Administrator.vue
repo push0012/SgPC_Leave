@@ -3,8 +3,8 @@
     <div class="container-fluid">
       <div class="row">
 
-        <div class="col-xl-3 col-md-6">
-          <a href="#/admin/admin/user/create">
+        <div class="col-xl-3 col-md-6" v-if="scopes.includes('create') == true">
+          <a href="#/admin/admin/user/create" >
           <stats-card>
             <div slot="header" class="icon-warning">
               <i class="nc-icon nc-single-02 text-warning"></i>
@@ -54,9 +54,11 @@
     },
     mounted(){
       this.loadData();
+      this.scopes = localStorage.getItem('scopes');
     },
     data () {
       return {
+        scopes: [],
         loading: {
           users:''
           }
