@@ -50,6 +50,8 @@ export default new Vuex.Store({
           const refreshtoken = resp.data.refresh_token
           localStorage.setItem('access_token', accesstoken)
           localStorage.setItem('refresh_token', refreshtoken)
+          localStorage.setItem('scopes', user.scopes)
+          localStorage.setItem('username', user.email)
           axios.defaults.headers.common['Authorization'] = accesstoken
           commit('auth_success', [accesstoken, user])
           resolve(resp)
@@ -58,6 +60,8 @@ export default new Vuex.Store({
           commit('auth_error')
           localStorage.removeItem('access_token')
           localStorage.removeItem('refresh_token')
+          localStorage.removeItem('scopes')
+          localStorage.removeItem('username')
           reject(err)
         })
       
@@ -69,6 +73,8 @@ export default new Vuex.Store({
         
         localStorage.removeItem('access_token')
         localStorage.removeItem('refresh_token')
+        localStorage.removeItem('scopes')
+        localStorage.removeItem('username')
         delete axios.defaults.headers.common['Authorization']
         resolve()
       })
