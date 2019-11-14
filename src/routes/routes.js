@@ -25,6 +25,9 @@ import CreateEmployee from 'src/pages/CreateEmployee.vue'
 import ListEmployee from 'src/pages/ListEmployee.vue'
 import EditEmployee from 'src/pages/EditEmployee.vue'
 
+//import Business Logic Components
+import Apply from 'src/pages/Apply.vue'
+
 //Create Object
 Vue.use(VueRouter)
 
@@ -54,6 +57,11 @@ const router = new VueRouter({
         path: 'user',
         name: 'User',
         component: UserProfile
+      },
+      {
+        path: 'apply',
+        name: 'Apply',
+        component: Apply
       },
       {
         path: 'admin/user/create',
