@@ -35,6 +35,10 @@
         <i class="nc-icon nc-bell-55"></i>
         <p>Notifications</p>
       </sidebar-link>
+      <sidebar-link to="/admin/apply">
+        <i class="nc-icon nc-cart-simple"></i>
+        <p>Apply Leave</p>
+      </sidebar-link>
 
       <template slot="bottom-links">
         <sidebar-link to="/admin/admin">
