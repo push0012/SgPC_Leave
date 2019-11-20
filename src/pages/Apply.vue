@@ -4,81 +4,83 @@
       <div class="row">
         <div class="col-md-12">
   <card>
-    <h4 slot="header" class="card-title">Apply Leave</h4>
+    <h4 slot="header" class="card-title">Request Leave Form (Gen. 125)</h4>
     <form>
-        <div class="row">
-            <div class="col-md-4">
-                <label >Employee Name</label>
-                <base-input type="text"
-                        label="Name"
-                        :disabled="true"
-                        >
-                </base-input>
-            </div>
-            <div class="col-md-4">
-                <label >Position</label>
-                <base-input type="text"
-                        label="Position"
-                        :disabled="true"
-                        >
-                </base-input>
-            </div>
-            <div class="col-md-4">
-                <label >Department</label>
-                <base-input type="text"
-                            label="Name"
-                            placeholder="Name"
-                            >
-                </base-input>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-3">
                 <label>Leave Type</label>
-                <b-form-select v-model="employee.nine_month" :options="option_probationary"></b-form-select>
+                <b-form-select :options="option_leave_type"></b-form-select>
             </div>
             <div class="col-md-3">
-                <label >Number of Days Applied</label>
                 <base-input type="text"
-                        label="date_count"
-                        placeholder="NIC"
-                        >
+                    label="number of days applied"
+                    placeholder="Number of Days Applied"
+                    >
                 </base-input>
             </div>
-            <div class="col-md-6">
-                <base-input type="email"
-                    label="Email"
+            <div class="col-md-3">
+                <base-input type="date"
+                    label="requesting date"
+                    placeholder="Requesting Date"
+                    >
+                </base-input>
+            </div>
+            <div class="col-md-3">
+                <base-input type="text"
+                    label="leave taken for year"
+                    placeholder="Leave Taken for Year"
                     :disabled="true"
-                    placeholder="Email"
-                    v-model="employee.email">
+                    >
                 </base-input>
             </div>
+            
         </div>
 
         <div class="row">
             <div class="col-md-4">
+                <base-input type="date"
+                    label="first appoinment date"
+                    :disabled="true"
+                   >
+                </base-input>
+            </div>
+            <div class="col-md-4">
               <base-input type="date"
-                        label="Joined Date"
-                        placeholder="Joined Date"
-                        v-model="employee.joined_date">
+                        label="leave start date"
+                        placeholder="Leave Start Date"
+                       >
               </base-input>
             </div>
             <div class="col-md-4">
-                <label>Probationary</label>
-                <b-form-select v-model="employee.nine_month" :options="option_probationary"></b-form-select>
+                <base-input type="date"
+                        label="leave end date"
+                        placeholder="Leave End Date"
+                       >
+              </base-input>
+            </div>
+      </div>
+      <div class="row">
+            <div class="col-md-12">
+                <base-input type="text"
+                        label="reason"
+                        placeholder="Reason for Applying Leave"
+                       >
+                </base-input>
+            </div>
+        </div>
+      <div class="row">
+          <div class="col-md-4">
+                <label>Officer Acting</label>
+                <b-form-select ></b-form-select>
             </div>
             <div class="col-md-4">
-                <label>Job Category</label>
-                <b-form-select v-model="employee.job_id" :options="option_job">
-                    <option v-for="(index, job) in jobs" :key="job" :value="index.job_id">
-                        {{ index.job_title}}
-                    </option>
-                </b-form-select>
+                <label>Supervising Officer</label>
+                <b-form-select ></b-form-select>
             </div>
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-info btn-fill float-right" @click.prevent="createEmployee">
-          Create Employee
+        <button type="submit" class="btn btn-info btn-fill float-right" >
+          Request Leave
         </button>
         
       </div>
@@ -93,6 +95,30 @@
     </div>
 </template>
 <script>
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import Card from 'src/components/Cards/Card.vue'
+const axios = require('axios');
+
+  export default {
+    components: {
+      Card,
+      Loading
+    },
+    data () {
+      return {
+        option_leave_type: [
+            { value: null, text: 'Please select...', disabled: true },
+            { value: 'casual', text: 'Casual' },
+		    { value: 'medical', text: 'Medical' },
+		    { value: 'other', text: 'Other' },
+        ],
+      }
+    },
+    methods: {
+      
+    }
+  }
 
 </script>
 <style>
