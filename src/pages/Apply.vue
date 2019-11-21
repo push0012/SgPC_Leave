@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-3">
                 <label>Leave Type</label>
-                <b-form-select :options="option_leave_type"></b-form-select>
+                <b-form-select v-model="leave.leave_spec" :options="option_leave_type"></b-form-select>
             </div>
             <div class="col-md-3">
                 <base-input type="text"
@@ -33,9 +33,7 @@
                     >
                 </base-input>
             </div>
-            
         </div>
-
         <div class="row">
             <div class="col-md-4">
                 <base-input type="date"
@@ -71,21 +69,26 @@
       <div class="row">
           <div class="col-md-4">
                 <label>Officer Acting</label>
-                <b-form-select ></b-form-select>
+                <b-form-select v-model="leave.emp_act_id" :options="option_acting">
+                    <option v-for="(index, acting) in actings" :key="acting" :value="index.emp_id">
+                        {{index.title+' '+ index.emp_name}}
+                    </option>
+                </b-form-select>
             </div>
             <div class="col-md-4">
                 <label>Supervising Officer</label>
-                <b-form-select ></b-form-select>
+                <b-form-select v-model="leave.supervising_officer" :options="option_supervising">
+                    <option v-for="(index, supervise) in supervises" :key="supervise" :value="index.emp_id">
+                        {{index.title+' '+ index.emp_name}}
+                    </option>
+                </b-form-select>
             </div>
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-info btn-fill float-right" >
           Request Leave
         </button>
-        
       </div>
-
-      <div class="clearfix"></div>
     </form>
   </card>
 
@@ -105,18 +108,52 @@ const axios = require('axios');
       Card,
       Loading
     },
+    mounted(){
+      this.loadActing();
+      this.loadSupervise();
+    },   
     data () {
       return {
+        actings:'',
+        supervises:'',
+        leave:{
+          leave_spec:null,
+          emp_act_id:null,
+          supervising_officer:null
+        },
         option_leave_type: [
-            { value: null, text: 'Please select...', disabled: true },
-            { value: 'casual', text: 'Casual' },
-		    { value: 'medical', text: 'Medical' },
-		    { value: 'other', text: 'Other' },
+          { value: null, text: 'Please select...', disabled: true },
+          { value: 'casual', text: 'Casual' },
+		      { value: 'medical', text: 'Medical' },
+		      { value: 'other', text: 'Other' },
+        ], 
+        option_acting:[
+           { value: null, text: 'Please select...', disabled: true },
         ],
+        option_supervising:[
+           { value: null, text: 'Please select...', disabled: true },
+        ]
       }
     },
     methods: {
-      
+      loadActing () {
+            var username = localStorage.getItem('username') 
+            axios.get(process.env.VUE_APP_BASEURL + '/samejob/'+username
+            )
+            .then((response) => {
+              this.actings = response.data;
+            }).catch( error => { 
+              console.log('error: ' + error); 
+            });
+      },
+      loadSupervise() {
+            axios.get(process.env.VUE_APP_BASEURL + '/supervisors')
+            .then((response) => {
+              this.supervises = response.data;
+            }).catch( error => { 
+              console.log('error: ' + error); 
+            });
+      },
     }
   }
 
