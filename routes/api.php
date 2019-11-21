@@ -34,3 +34,5 @@ Route::resource('head_approves', 'HeadLeaveApproveController');
 
 //Dashboard Controller Methods
 Route::get('users', 'DashboardController@users');
+Route::get('samejob/{username}', 'DashboardController@samejob');
+Route::get('supervisors', 'DashboardController@supervisors');
