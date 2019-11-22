@@ -19,6 +19,7 @@
           </stats-card>
           </a>
         </div>
+
         <div class="col-xl-3 col-md-6">
           <a href="#/admin/admin/employee/list">
           <stats-card>
@@ -31,6 +32,23 @@
             </div>
             <div slot="footer">
               <p class="card-category">View Employees</p>
+            </div>
+          </stats-card>
+          </a>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <a href="#/admin/admin/record/monthLeave">
+          <stats-card>
+            <div slot="header" class="icon-warning">
+              <i class="fa fa-database text-info"></i>
+            </div>
+            <div slot="content">
+              <h3 class="card-title"></h3>
+              <p class="card-category"></p>
+            </div>
+            <div slot="footer">
+              <p class="card-category">Month Leave Record</p>
             </div>
           </stats-card>
           </a>
