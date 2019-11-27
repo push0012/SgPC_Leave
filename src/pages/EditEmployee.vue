@@ -125,7 +125,7 @@
         option_title: [
           { value: null, text: 'Please select an option', disabled: true },
           { value: 'Mr.', text: 'Mr.' },
-          { value: 'Ms', text: 'Ms.' },
+          { value: 'Ms.', text: 'Ms.' },
         ],
         option_probationary: [
           { value: null, text: 'Please select an option', disabled: true },
