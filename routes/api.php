@@ -32,6 +32,9 @@ Route::resource('official_leaves', 'OfficialLeaveController');
 //step 4
 Route::resource('head_approves', 'HeadLeaveApproveController');
 
+//step 5
+Route::resource('record_months', 'RecordMonthController');
+
 //Dashboard Controller Methods
 Route::get('users', 'DashboardController@users');
 Route::get('samejob/{username}', 'DashboardController@samejob');
