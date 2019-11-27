@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label >Employee</label>
-                <b-form-select v-model="month_record.emp_id" :options="option_emp_id">
+                <b-form-select v-model="month_record.user_id" :options="option_emp_id">
                     <option v-for="(index, employee) in employees" :key="employee" :value="index.id">
                         {{index.title+' '+ index.name}}
                     </option>
@@ -101,7 +101,7 @@
         jobs:'',
         employees:'',
         month_record: {
-            emp_id:null,
+            user_id:null,
             record_year:null,
             record_month:null,
             ol_count:'',
@@ -130,6 +130,15 @@
       }
     },
     methods: {
+        notifyMe(title,message,icon,type){
+          this.$notifications.notify(
+          { 
+            title:title, message: message, icon: icon, 
+            horizontalAlign: 'right',
+            verticalAlign: 'bottom',
+            type: type
+          })
+        },
         loadData(){
             axios.get(process.env.VUE_APP_BASEURL + '/employees'              
             ).then((response) => {
@@ -141,7 +150,35 @@
       
         },
         recordLeave(){
-          
+          axios.post(process.env.VUE_APP_BASEURL + '/record_months',
+              { 
+                user_id:this.month_record.user_id,
+                record_year:this.month_record.record_year,
+                record_month:this.month_record.record_month,
+                ol_count:this.month_record.ol_count,
+                sl_count:this.month_record.sl_count,
+                casual_count:this.month_record.casual_count,
+                medical_count:this.month_record.medical_count
+              }
+            ).then((response) => {
+              this.notifyMe(
+                'Success Message',
+                '<span>Month Leave Record has been succesfully stored',
+                'fa fa-check-circle',
+                'success'
+                );
+              this.$router.push("/admin/admin");
+              
+            }).catch( error => { 
+              
+              this.notifyMe(
+                'Error Message',
+                'Sorry, Data not Saved',
+                'fa fa-exclamation-triangle',
+                'danger'
+                );
+              this.$router.push("/admin/admin");
+            });
         }
     }
   }
