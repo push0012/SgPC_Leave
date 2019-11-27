@@ -18,7 +18,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee =  Employee::select('emp_id as id','title','emp_name as name','sex','nic','mobile','email','joined_date as joined date')
+        $employee =  Employee::select('user_id as id','title','emp_name as name','sex','nic','mobile','email','joined_date as joined date')
         ->where('deleted',0)->get();
         return response()->json($employee, 201);
     }
