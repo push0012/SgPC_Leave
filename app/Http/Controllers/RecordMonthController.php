@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\RecordMonth;
+use DB;
 
 class RecordMonthController extends Controller
 {
@@ -14,7 +15,8 @@ class RecordMonthController extends Controller
      */
     public function index()
     {
-        //
+        $recordmonths = DB::table('recordmonthview')->get();
+        return response()->json($recordmonths, 201);
     }
 
     /**
@@ -36,7 +38,6 @@ class RecordMonthController extends Controller
     public function store(Request $request)
     {
         $recordmonths = RecordMonth::create($request->all());
-
         return response()->json($recordmonths, 201);
     }
 
@@ -48,7 +49,8 @@ class RecordMonthController extends Controller
      */
     public function show($id)
     {
-        //
+        $recordmonths = DB::table('recordmonthview')->where('month',$id)->get();
+        return response()->json($recordmonths, 201);
     }
 
     /**
