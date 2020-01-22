@@ -28,6 +28,7 @@ import EditEmployee from 'src/pages/EditEmployee.vue'
 //import Business Logic Components
 import Apply from 'src/pages/Apply.vue'
 import RecordMonthLeave from 'src/pages/RecordMonthLeave.vue'
+import ListLeave from 'src/pages/ListLeave.vue'
 
 //Create Object
 Vue.use(VueRouter)
@@ -88,6 +89,11 @@ const router = new VueRouter({
         path: 'admin/record/monthLeave',
         name: 'Admin/record/monthLeave',
         component: RecordMonthLeave
+      },
+      {
+        path: 'admin/record/listLeave',
+        name: 'Admin/record/listLeave',
+        component: ListLeave
       },
       {
         path: 'table-list',

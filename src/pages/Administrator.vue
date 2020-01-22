@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-xl-3 col-md-6">
-          <a href="#/admin/admin/record/monthLeave">
+          <a href="#/admin/admin/record/listLeave">
           <stats-card>
             <div slot="header" class="icon-warning">
               <i class="fa fa-database text-info"></i>
